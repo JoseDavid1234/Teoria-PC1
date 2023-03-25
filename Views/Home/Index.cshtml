@@ -1,0 +1,39 @@
+﻿
+<style>
+ form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+ }
+ .btn{
+  width: 100px;
+  margin: auto;
+ }
+</style>
+
+<div class="container">
+    <h1>Calculadora de pagos de tarjeta de crédito</h1>
+    <form method="post" asp-action="CalcularPago" asp-controller="Home">
+        <div class="form-group">
+            <label>Número de tarjeta:</label>
+            <input class="form-control" type="text" name="numeroTarjeta">
+        </div>
+        <div class="form-group">
+            <label>Fecha de vencimiento del pago:</label>
+            <input class="form-control" type="date" name="fechaVencimiento">
+        </div>
+        <div class="form-group">
+            <label>Monto a pagar:</label>
+            <input class="form-control" type="number" name="montoPagar" step="0.01">
+        </div>
+        <button class="btn btn-primary" type="submit">Calcular</button>
+    </form>
+    @if (ViewBag.TotalPagar != null)
+    {
+        <hr>
+        <h2>Resultado:</h2>
+        <p>Monto a pagar por deuda inicial: $@ViewBag.MontoPagar</p>
+        <p>Intereses por mora (@ViewBag.DiasMora días al 0.005% diario): $@ViewBag.InteresMora</p>
+        <p>Total a pagar: $@ViewBag.TotalPagar</p>
+    }
+</div>
